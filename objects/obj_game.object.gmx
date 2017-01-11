@@ -71,6 +71,7 @@ mp_grid_add_instances(movement_grid, obj_unit, false);
 /// Clicking a unit selects it in the variable selected_unit
 /// And then we switch states to the Move Range state.
 
+
 if (state == STATE_MAIN)
 {
     if (state_timer == 0)
@@ -78,6 +79,7 @@ if (state == STATE_MAIN)
         // reset variables
         selected_unit = noone;
         selected_tile = noone;
+        selected_wall = noone;
         
         // reset floor tiles
         with(obj_floor)
@@ -98,11 +100,11 @@ if (state == STATE_MAIN)
         // This code selects a unit to be moved.
         // Code can be added to see, for instance, if 
         // the unit's team is a selectable team
-        
-        selected_unit = instance_position(mouse_x, mouse_y, obj_unit);
+           
+        selected_unit = instance_position(obj_mouse.x, obj_mouse.y, obj_unit);
         
         // switch over to the move range state
-        if selected_unit
+        if(selected_unit)
         {
             state_switch(STATE_MOVE_RANGE);
         }
@@ -145,7 +147,7 @@ if (state == STATE_MOVE_RANGE)
             
         if(selected_unit.Turns &gt; 0)
         {
-                FindMovementRange(selected_unit.my_tile, selected_unit.MoveRange, selected_unit.Turns);
+            FindMovementRange(selected_unit.my_tile, selected_unit.MoveRange, selected_unit.Turns);
         }
         
         // Make sure that the unit can't move to a tile with a unit on it.
@@ -169,14 +171,18 @@ if (state == STATE_MOVE_RANGE)
         // otherwise, check to see if there's a tile under the mouse and
         // store that variable in selected_tile and switch to the move state.
         
-        if instance_position(mouse_x, mouse_y, obj_unit)
+        if(instance_position(mouse_x, mouse_y, obj_unit))
         {
             state_switch(STATE_MAIN);
+        }
+        else if(instance_position(mouse_x, mouse_y, obj_wall))
+        {
+           state_switch(STATE_MAIN);
         }
         else
         {
             selected_tile = instance_position(mouse_x, mouse_y, obj_floor);
-            
+      
             if(selected_tile &amp;&amp; selected_tile.Reachable)
             {
                 selected_unit.Turns -= 1;
@@ -223,7 +229,7 @@ if(state == STATE_MOVE)
         // objObject index, or instance id, of the instances to be added into the mp_grid
         // precWhether the check is based on pixel-perfect collisions (true = slow) or its bounding box in general (false = fast).
         mp_grid_add_instances(movement_grid, obj_wall, false);
-                
+        
         with(obj_floor)
         {
             Reachable = false;

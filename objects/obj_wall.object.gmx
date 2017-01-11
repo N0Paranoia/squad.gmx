@@ -3,7 +3,7 @@
   <spriteName>spr_wall</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-2</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>obj_floor</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -40,6 +40,7 @@
           <argument>
             <kind>1</kind>
             <string>Cost = 0;
+depth = -y;
 </string>
           </argument>
         </arguments>
@@ -62,14 +63,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if Reachable
+            <string>if(global.isoview)
 {
-    image_blend=c_blue;
-    draw_self();
+    var isox,isoy;
+    isox=get_iso_x(x,y);
+    isoy=get_iso_y(x,y);
+
+    draw_sprite(spr_iso_wall,0,isox,isoy);
 }
 else
 {
-    image_blend=c_white;
     draw_self();
 }
 </string>

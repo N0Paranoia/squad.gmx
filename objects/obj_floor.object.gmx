@@ -64,27 +64,74 @@ my_unit = instance_position(x, y, obj_unit);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(Reachable) 
+            <string>selected_tile = ((x-sprite_width/2 &lt; mouse_x) &amp;&amp; (x+sprite_width/2 &gt; mouse_x) &amp;&amp; (y-sprite_height/2 &lt; mouse_y) &amp;&amp; (y+sprite_height/2 &gt; mouse_y));
+
+
+
+if(global.isoview)
 {
-    if((x-sprite_width/2 &lt; mouse_x) &amp;&amp; (x+sprite_width/2 &gt; mouse_x) &amp;&amp; (y-sprite_height/2 &lt; mouse_y) &amp;&amp; (y+sprite_height/2 &gt; mouse_y)) {
-        image_index = 1;
-        draw_self();
-    } else {
-        image_index = 0;
-        draw_self();
-    }
-    if(Half_Turn)
+    var isox,isoy;
+    isox=get_iso_x(x,y);
+    isoy=get_iso_y(x,y);
+      
+    if(Reachable) 
     {
-        image_blend=c_yellow;
-    } else {
-        image_blend=c_aqua;
+        if(Half_Turn)
+        {
+            if(selected_tile)
+            {
+                draw_sprite(spr_iso_floor,3,isox,isoy);
+            }
+            else
+            {
+                draw_sprite(spr_iso_floor,1,isox,isoy);
+            }
+        } 
+        else 
+        {
+            if(selected_tile)
+            {
+                draw_sprite(spr_iso_floor,4,isox,isoy);
+            }
+            else
+            {
+                draw_sprite(spr_iso_floor,2,isox,isoy);
+            }
+        }
     }
-} else {
-    image_index = 0;
-    image_blend=c_white;
+    else
+    {
+        draw_sprite(spr_iso_floor,0,isox,isoy);
+    }
+}
+else
+{
+    if(Reachable) 
+    {
+        if(selected_tile)
+        {
+            image_index = 1;
+        }
+        else
+        {
+            image_index = 0;
+        }
+        if(Half_Turn)
+        {
+            image_blend=c_yellow;
+        } 
+        else 
+        {
+            image_blend=c_aqua;
+        }
+    } 
+    else
+    {
+        image_index = 0;
+        image_blend=c_white;
+    }
     draw_self();
 }
-
 </string>
           </argument>
         </arguments>

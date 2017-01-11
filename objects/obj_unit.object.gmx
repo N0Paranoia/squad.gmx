@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>-1</depth>
   <persistent>0</persistent>
-  <parentName>self</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -54,12 +54,33 @@ my_tile = instance_position(x, y, obj_floor);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(Selected_unit){
-    image_blend=c_green;
-} else {
-    image_blend=c_white;
+            <string>if(global.isoview)
+{
+    var isox,isoy;
+    isox=get_iso_x(x,y);
+    isoy=get_iso_y(x,y);
+    
+    if(Selected_unit)
+    {
+        draw_sprite(spr_iso_unit,1,isox,isoy);
+    }
+    else
+    {
+        draw_sprite(spr_iso_unit,0,isox,isoy);
+    }
 }
-draw_self();
+else
+{
+    if(Selected_unit)
+    {
+        image_index = 1;
+    }
+    else
+    {
+        image_index = 0;
+    }
+    draw_self();
+}
     
 </string>
           </argument>

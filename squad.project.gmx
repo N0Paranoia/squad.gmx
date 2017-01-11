@@ -6,15 +6,21 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprite>sprites\spr_iso_unit</sprite>
     <sprite>sprites\spr_unit</sprite>
     <sprite>sprites\spr_floor</sprite>
     <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_iso_wall</sprite>
+    <sprite>sprites\spr_iso_floor</sprite>
+    <sprite>sprites\spr_mouse</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\FindMovementRange.gml</script>
     <script>scripts\state_switch.gml</script>
+    <script>scripts\get_iso_x.gml</script>
+    <script>scripts\get_iso_y.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_game</object>
@@ -22,6 +28,8 @@
     <object>objects\obj_floor</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_hud</object>
+    <object>objects\obj_control</object>
+    <object>objects\obj_mouse</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

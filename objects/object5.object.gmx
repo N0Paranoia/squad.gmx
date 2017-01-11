@@ -3,11 +3,58 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-999</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>x+=16
+y+=16
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>depth=-(x+y)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -25,18 +72,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Draw HUD
-if(debug_mode)
+            <string>if(global.isoview)
 {
-    draw_set_colour(c_white);
-    draw_text(0,0,"Isometric: "+string(global.isoview))
-    draw_text(view_xview, view_yview + 16, "Turn = " + string(obj_unit.Turns));
-    draw_text(view_xview, view_yview + 32, "Mouse_x = " +string(mouse_x));
-    draw_text(view_xview, view_yview + 48, "Mouse_y = " +string(mouse_y));
-    draw_text(view_xview, view_yview + 64, "Obj_Mouse_x = " +string(obj_mouse.x));
-    draw_text(view_xview, view_yview + 80, "Obj_Mouse_y = " +string(obj_mouse.y));
+    var isox,isoy;
+    isox=get_iso_x(x,y);
+    isoy=get_iso_y(x,y);
+    
+    draw_sprite(spr_iso_floor,0,isox,isoy);
 }
-
+else
+{
+    draw_self();
+}
 </string>
           </argument>
         </arguments>
