@@ -49,8 +49,18 @@ y = mouse_y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = mouse_x;
-y = mouse_y;
+            <string>if(global.isoview)
+{
+x = (mouse_y+ mouse_x);
+y = (-mouse_x + mouse_y);
+    //x = mouse_x + mouse_y;
+    //y = mouse_y;
+}
+else
+{
+    x = mouse_x;
+    y = mouse_y;
+}
 </string>
           </argument>
         </arguments>
